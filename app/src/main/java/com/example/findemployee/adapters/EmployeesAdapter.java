@@ -38,7 +38,9 @@ public class EmployeesAdapter  extends RecyclerView.Adapter<EmployeesAdapter.Emp
         holder.textViewLastName.setText(employee.getLast_name());
         String age;
         if (employee.getAge()>0)
-        age=String.valueOf(employee.getAge());
+        {
+            age=String.valueOf(employee.getAge());
+        }
         else
             age=holder.itemView.getContext().getString(R.string.no_data);
         holder.textViewAge.setText(age);
@@ -51,14 +53,14 @@ public class EmployeesAdapter  extends RecyclerView.Adapter<EmployeesAdapter.Emp
         return arrayList.size();
     }
 
-    public class EmployeeViewHolder extends RecyclerView.ViewHolder {
+    class EmployeeViewHolder extends RecyclerView.ViewHolder {
 
         TextView textViewFirstName;
         TextView textViewLastName;
         TextView textViewAge;
 
 
-        public EmployeeViewHolder(@NonNull View itemView) {
+        EmployeeViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewFirstName = itemView.findViewById(R.id.textViewItemFirstName);
             textViewLastName = itemView.findViewById(R.id.textViewtemLastName);
