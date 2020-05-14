@@ -1,27 +1,42 @@
 package com.example.findemployee.data;
 
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
+@Entity(tableName = "employees", foreignKeys = @ForeignKey(entity = Speciality.class,parentColumns = "id",childColumns = "speciality_id"))
 public class Employee {
-
+    @PrimaryKey(autoGenerate = true)
+    private int uniqueId;
     private String first_name;
     private String last_name;
     private String birthday;
     private String avatar_url;
     private int age;
-    private List<Speciality> specialityList;
+    private int speciality_id;
 
-    public List<Speciality> getSpecialityList() {
-        return specialityList;
+    public int getSpeciality_id() {
+        return speciality_id;
     }
 
-    public void setSpecialityList(List<Speciality> specialityList) {
-        this.specialityList = specialityList;
+    public Employee(int uniqueId, String first_name, String last_name, String birthday, String avatar_url, int age, int specialityList) {
+        this.uniqueId = uniqueId;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.birthday = birthday;
+        this.avatar_url = avatar_url;
+        this.age = age;
+        this.speciality_id = specialityList;
+    }
+
+    public void setSpeciality_id(int speciality_id) {
+        this.speciality_id = speciality_id;
     }
     private void setAge(String birthday)
     {
@@ -55,12 +70,13 @@ public class Employee {
         return age;
     }
 
-    public Employee(String first_name, String last_name, String birthday, String avatar_url, List<Speciality> specialityList) {
+    @Ignore
+    public Employee(String first_name, String last_name, String birthday, String avatar_url, int specialityList) {
         this.first_name = first_name.substring(0,1).toUpperCase()+first_name.substring(1).toLowerCase();
         this.last_name = last_name.substring(0,1).toUpperCase()+last_name.substring(1).toLowerCase();
         this.birthday = birthday;
         this.avatar_url = avatar_url;
-        this.specialityList=specialityList;
+        this.speciality_id =specialityList;
         setAge(birthday);
     }
 

@@ -1,6 +1,11 @@
 package com.example.findemployee.data;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "specialities")
 public class Speciality {
+    @PrimaryKey
     private int id;
     private String name;
 
