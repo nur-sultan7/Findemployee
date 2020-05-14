@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class Employee {
 
@@ -26,9 +27,9 @@ public class Employee {
     {
         Date date = null;
         try {
-            date = new SimpleDateFormat("yyyy-MM-dd").parse(birthday);
+            date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(birthday);
             if (date.getYear()<0)
-                date = new SimpleDateFormat("dd-MM-yyyy").parse(birthday);
+                date = new SimpleDateFormat("dd-MM-yyyy",Locale.getDefault()).parse(birthday);
         } catch (ParseException e) {
             e.printStackTrace();
         }
