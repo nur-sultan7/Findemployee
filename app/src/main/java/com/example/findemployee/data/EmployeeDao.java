@@ -23,6 +23,12 @@ public interface EmployeeDao {
     @Delete
     void deleteEmployee(Employee employee);
 
+    @Query("DELETE FROM employees")
+    void deleteAllEmployees();
+
+    @Query("Delete FROM specialities")
+    void deleteAllSpecialities();
+
     @Insert(onConflict=OnConflictStrategy.IGNORE)
     void insertSpeciality(Speciality speciality);
 
