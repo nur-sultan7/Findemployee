@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.findemployee.adapters.EmployeesAdapter;
@@ -57,6 +58,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                    employeesAdapter.setArrayList(employees);
                    firstTime=true;
                }
+            }
+        });
+        employeesAdapter.setOnEmployeeClickListener(new EmployeesAdapter.OnEmployeeClickListener() {
+            @Override
+            public void onClick(int position) {
+                Employee employee = employeesAdapter.getEmployeeByPosition(position);
+                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                intent.putExtra("id", employee.getUnique_Id());
+                startActivity(intent);
             }
         });
 
