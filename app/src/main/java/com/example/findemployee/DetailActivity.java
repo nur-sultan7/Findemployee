@@ -28,7 +28,7 @@ public class DetailActivity extends AppCompatActivity {
         textViewLastName = findViewById(R.id.textViewLastName);
         textViewBirthDay = findViewById(R.id.textViewBirthday);
         textViewSpeciality = findViewById(R.id.textViewSpeciality);
-        imageViewAvatar = findViewById(R.id.imageViewAvatar);
+        imageViewAvatar = findViewById(R.id.imageViewAvatarEmployee);
 
 
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
