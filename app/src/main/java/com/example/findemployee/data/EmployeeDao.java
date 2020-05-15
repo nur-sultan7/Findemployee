@@ -14,7 +14,7 @@ public interface EmployeeDao {
     @Query("SELECT * FROM employees")
     LiveData<List<Employee>> getAllEmployees();
 
-    @Query("SELECT * FROM employees WHERE uniqueId==:employee_id")
+    @Query("SELECT * FROM employees WHERE unique_id==:employee_id")
     Employee getEmployeeById(int employee_id);
 
     @Insert

@@ -1,5 +1,6 @@
 package com.example.findemployee.adapters;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +13,15 @@ import com.example.findemployee.R;
 import com.example.findemployee.data.Employee;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class EmployeesAdapter  extends RecyclerView.Adapter<EmployeesAdapter.EmployeeViewHolder>{
 
-    private ArrayList<Employee> arrayList = new ArrayList<>();
+    private List<Employee> arrayList = new ArrayList<>();
 
 
 
-    public void setArrayList(ArrayList<Employee> arrayList) {
+    public void setArrayList(List<Employee> arrayList) {
         this.arrayList = arrayList;
         notifyDataSetChanged();
     }
@@ -31,6 +33,7 @@ public class EmployeesAdapter  extends RecyclerView.Adapter<EmployeesAdapter.Emp
         return new EmployeeViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull EmployeeViewHolder holder, int position) {
         Employee employee = arrayList.get(position);
@@ -41,8 +44,10 @@ public class EmployeesAdapter  extends RecyclerView.Adapter<EmployeesAdapter.Emp
         {
             age=String.valueOf(employee.getAge());
         }
-        else
-            age=holder.itemView.getContext().getString(R.string.no_data);
+        else {
+            age = holder.itemView.getContext().getString(R.string.no_data);
+            holder.textViewAge.setTextColor(holder.itemView.getResources().getColor(android.R.color.holo_red_light));
+        }
         holder.textViewAge.setText(age);
 
 

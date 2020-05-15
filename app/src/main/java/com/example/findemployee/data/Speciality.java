@@ -5,8 +5,10 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "specialities")
 public class Speciality {
+
     @PrimaryKey
     private int id;
+
     private String name;
 
     public Speciality(int id, String name) {

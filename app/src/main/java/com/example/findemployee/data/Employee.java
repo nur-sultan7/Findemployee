@@ -10,10 +10,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-@Entity(tableName = "employees", foreignKeys = @ForeignKey(entity = Speciality.class,parentColumns = "id",childColumns = "speciality_id"))
+@Entity(tableName = "employees")
 public class Employee {
     @PrimaryKey(autoGenerate = true)
-    private int uniqueId;
+    private int unique_Id;
     private String first_name;
     private String last_name;
     private String birthday;
@@ -21,23 +21,49 @@ public class Employee {
     private int age;
     private int speciality_id;
 
-    public int getSpeciality_id() {
-        return speciality_id;
-    }
-
-    public Employee(int uniqueId, String first_name, String last_name, String birthday, String avatar_url, int age, int specialityList) {
-        this.uniqueId = uniqueId;
+    public Employee(int unique_Id, String first_name, String last_name, String birthday, String avatar_url, int age, int speciality_id) {
+        this.unique_Id = unique_Id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.birthday = birthday;
         this.avatar_url = avatar_url;
         this.age = age;
-        this.speciality_id = specialityList;
+        this.speciality_id = speciality_id;
     }
+    @Ignore
+    public Employee( String first_name, String last_name, String birthday, String avatar_url,  int speciality_id) {
+        this.unique_Id = unique_Id;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.birthday = birthday;
+        this.avatar_url = avatar_url;
+        this.speciality_id = speciality_id;
+        setAge(birthday);
+    }
+
+    public int getSpeciality_id() {
+        return speciality_id;
+    }
+
+    public int getUnique_Id() {
+        return unique_Id;
+    }
+
+    public void setUnique_Id(int unique_Id) {
+        this.unique_Id = unique_Id;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+
 
     public void setSpeciality_id(int speciality_id) {
         this.speciality_id = speciality_id;
     }
+
+    @Ignore
     private void setAge(String birthday)
     {
         Date date = null;
@@ -70,15 +96,7 @@ public class Employee {
         return age;
     }
 
-    @Ignore
-    public Employee(String first_name, String last_name, String birthday, String avatar_url, int specialityList) {
-        this.first_name = first_name.substring(0,1).toUpperCase()+first_name.substring(1).toLowerCase();
-        this.last_name = last_name.substring(0,1).toUpperCase()+last_name.substring(1).toLowerCase();
-        this.birthday = birthday;
-        this.avatar_url = avatar_url;
-        this.speciality_id =specialityList;
-        setAge(birthday);
-    }
+
 
     public String getFirst_name() {
         return first_name;
