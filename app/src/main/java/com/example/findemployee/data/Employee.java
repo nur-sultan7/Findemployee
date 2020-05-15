@@ -13,7 +13,7 @@ import java.util.Locale;
 @Entity(tableName = "employees")
 public class Employee {
     @PrimaryKey(autoGenerate = true)
-    private int unique_Id;
+   private int unique_Id;
     private String first_name;
     private String last_name;
     private String birthday;

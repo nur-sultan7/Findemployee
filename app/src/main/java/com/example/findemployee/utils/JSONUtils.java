@@ -14,6 +14,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class JSONUtils {
     private static String KEY_FIRST_NAME = "f_name";
@@ -55,7 +56,13 @@ public class JSONUtils {
 
             int idid = specialityList.get(0).getId();
             Employee employee = new Employee(first_name,last_name,birthday,avatar_url, idid);
-            mainViewModel.insertEmployee(employee);
+            try {
+                employee.setUnique_Id((int) mainViewModel.insertEmployee(employee));
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             arrayList.add(employee);
         }
         return arrayList;

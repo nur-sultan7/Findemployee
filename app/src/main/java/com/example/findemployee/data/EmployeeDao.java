@@ -18,7 +18,7 @@ public interface EmployeeDao {
     Employee getEmployeeById(int employee_id);
 
     @Insert
-    void insertEmployee(Employee employee);
+    long insertEmployee(Employee employee);
 
     @Delete
     void deleteEmployee(Employee employee);

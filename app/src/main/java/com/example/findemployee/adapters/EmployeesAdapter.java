@@ -68,6 +68,11 @@ public class EmployeesAdapter  extends RecyclerView.Adapter<EmployeesAdapter.Emp
     public int getItemCount() {
         return arrayList.size();
     }
+    public void clear()
+    {
+        this.arrayList.clear();
+        notifyDataSetChanged();
+    }
 
     class EmployeeViewHolder extends RecyclerView.ViewHolder {
 

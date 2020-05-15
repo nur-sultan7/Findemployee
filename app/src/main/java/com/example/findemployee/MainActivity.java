@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             ArrayList<Employee> employeeArrayList = JSONUtils.getArrayJSON(data, mainViewModel);
             if (employeeArrayList!=null && employeeArrayList.size()>0)
             {
+                employeesAdapter.clear();
                 employeesAdapter.setArrayList(employeeArrayList);
             }
             loaderManager.destroyLoader(LOADER_ID);

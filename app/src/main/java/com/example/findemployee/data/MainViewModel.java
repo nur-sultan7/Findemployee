@@ -54,9 +54,8 @@ public class MainViewModel extends AndroidViewModel {
     {
         new InsertSpeciality().execute(speciality);
     }
-    public void insertEmployee(Employee employee)
-    {
-        new InsertEmployee().execute(employee);
+    public long insertEmployee(Employee employee) throws ExecutionException, InterruptedException {
+        return new InsertEmployee().execute(employee).get();
     }
     public void deleteEmployee(Employee employee)
     {
@@ -74,13 +73,12 @@ public class MainViewModel extends AndroidViewModel {
         }
     }
 
-    private static class InsertEmployee extends AsyncTask<Employee,Void,Void>
+    private static class InsertEmployee extends AsyncTask<Employee,Void,Long>
     {
-
         @Override
-        protected Void doInBackground(Employee... employees) {
+        protected Long doInBackground(Employee... employees) {
             if (employees[0]!=null)
-                database.employeeDao().insertEmployee(employees[0]);
+            return database.employeeDao().insertEmployee(employees[0]);
             return null;
         }
     }

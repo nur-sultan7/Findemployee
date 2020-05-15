@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.findemployee.data.Employee;
 import com.example.findemployee.data.MainViewModel;
+import com.example.findemployee.data.Speciality;
 import com.squareup.picasso.Picasso;
 
 public class DetailActivity extends AppCompatActivity {
@@ -39,7 +40,8 @@ public class DetailActivity extends AppCompatActivity {
             textViewFirstName.setText(employee.getFirst_name());
             textViewLastName.setText(employee.getLast_name());
             textViewBirthDay.setText(employee.getBirthday());
-            textViewSpeciality.setText(String.valueOf(employee.getSpeciality_id()));
+            Speciality speciality = mainViewModel.getSpeciality(employee.getSpeciality_id());
+            textViewSpeciality.setText(speciality.getName());
             Picasso.get().load(employee.getAvatar_url()).into(imageViewAvatar);
         }
     }
