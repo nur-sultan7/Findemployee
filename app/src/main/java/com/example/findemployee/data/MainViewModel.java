@@ -1,23 +1,76 @@
 package com.example.findemployee.data;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.loader.content.AsyncTaskLoader;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class MainViewModel extends AndroidViewModel {
     private static  EmployeesDatabase database;
     private LiveData<List<Employee>> employees;
+    private List<SpecialityOfEmployee> specialitiesOfEmployeeList;
 
     public MainViewModel(@NonNull Application application) {
         super(application);
         database=EmployeesDatabase.getInstance(getApplication());
         employees=database.employeeDao().getAllEmployees();
+    }
+
+
+    public void insertSpecialityOfEmployee(List<SpecialityOfEmployee> specialityOfEmployee)
+    {
+        new InsertSpecialityOfEmployee().execute(specialityOfEmployee);
+    }
+    private static class InsertSpecialityOfEmployee extends AsyncTask<List<SpecialityOfEmployee>,Void, Void>
+    {
+        @Override
+        protected Void doInBackground(List<SpecialityOfEmployee>... lists) {
+            if (lists[0]!=null)
+            database.employeeDao().insertSpecialitiesOfEmployee(lists[0]);
+            return null;
+        }
+    }
+
+    public List<Speciality> getSpecialitiesOfEmployeeListById(int employee_id)
+    {
+        try {
+            return new GetSpecialitiesOfEmployeeTask().execute(employee_id).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    private static class GetSpecialitiesOfEmployeeTask extends AsyncTask<Integer,Void,List<Speciality>>
+    {
+        @Override
+        protected List<Speciality> doInBackground(Integer... integers) {
+            List<SpecialityOfEmployee> specialityOfEmployeeList = null;
+            List<Integer> specialityIdList= new ArrayList<>();
+            List<Speciality> specialityList=null;
+            if (integers[0]!=null)
+            {
+                specialityOfEmployeeList=database.employeeDao().getSpecialitiesOfEmployee(integers[0]);
+                for (SpecialityOfEmployee specialityOfEmployee: specialityOfEmployeeList )
+                {
+                    specialityIdList.add(specialityOfEmployee.getSpeciality_id());
+                }
+                specialityList=database.employeeDao().getSpecialityList(specialityIdList);
+
+            }
+
+            return specialityList;
+        }
     }
 
     public LiveData<List<Employee>> getEmployees() {
@@ -122,6 +175,7 @@ public class MainViewModel extends AndroidViewModel {
 
         @Override
         protected Void doInBackground(Void... voids) {
+            database.employeeDao().deleteAllSpecialitiesOfEmployees();
             database.employeeDao().deleteAllEmployees();
             database.employeeDao().deleteAllSpecialities();
             return null;

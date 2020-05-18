@@ -11,7 +11,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
-@Database(entities = {Speciality.class,Employee.class} , version = 2, exportSchema = false)
+@Database(entities = {Speciality.class,Employee.class, SpecialityOfEmployee.class} , version = 3, exportSchema = false)
 public abstract class EmployeesDatabase extends RoomDatabase {
     private static EmployeesDatabase database;
     private static final String DB_NAME="employees.db";

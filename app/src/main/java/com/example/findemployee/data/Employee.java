@@ -19,31 +19,26 @@ public class Employee {
     private String birthday;
     private String avatar_url;
     private int age;
-    private int speciality_id;
 
-    public Employee(int unique_Id, String first_name, String last_name, String birthday, String avatar_url, int age, int speciality_id) {
+
+    public Employee(int unique_Id, String first_name, String last_name, String birthday, String avatar_url, int age) {
         this.unique_Id = unique_Id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.birthday = birthday;
         this.avatar_url = avatar_url;
         this.age = age;
-        this.speciality_id = speciality_id;
     }
     @Ignore
-    public Employee( String first_name, String last_name, String birthday, String avatar_url,  int speciality_id) {
+    public Employee( String first_name, String last_name, String birthday, String avatar_url) {
         this.unique_Id = unique_Id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.birthday = birthday;
         this.avatar_url = avatar_url;
-        this.speciality_id = speciality_id;
         setAge(birthday);
     }
 
-    public int getSpeciality_id() {
-        return speciality_id;
-    }
 
     public int getUnique_Id() {
         return unique_Id;
@@ -57,11 +52,6 @@ public class Employee {
         this.age = age;
     }
 
-
-
-    public void setSpeciality_id(int speciality_id) {
-        this.speciality_id = speciality_id;
-    }
 
     @Ignore
     private void setAge(String birthday)

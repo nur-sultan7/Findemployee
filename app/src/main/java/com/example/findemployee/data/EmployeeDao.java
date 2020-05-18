@@ -17,8 +17,14 @@ public interface EmployeeDao {
     @Query("SELECT * FROM employees WHERE unique_id==:employee_id")
     Employee getEmployeeById(int employee_id);
 
+    @Query("SELECT * FROM specialities_of_employees WHERE employee_id == :employee_id ")
+    List<SpecialityOfEmployee> getSpecialitiesOfEmployee(int employee_id);
+
     @Insert
     long insertEmployee(Employee employee);
+
+    @Insert
+    void insertSpecialitiesOfEmployee(List<SpecialityOfEmployee> specialityOfEmployee);
 
     @Delete
     void deleteEmployee(Employee employee);
@@ -29,11 +35,17 @@ public interface EmployeeDao {
     @Query("Delete FROM specialities")
     void deleteAllSpecialities();
 
+    @Query("Delete from specialities_of_employees")
+    void deleteAllSpecialitiesOfEmployees();
+
     @Insert(onConflict=OnConflictStrategy.IGNORE)
     void insertSpeciality(Speciality speciality);
 
     @Query("SELECT * FROM specialities WHERE id==:id")
     Speciality getSpecialityById(int id);
+
+    @Query("Select * from specialities where id in (:specialityIdList)")
+    List<Speciality> getSpecialityList(List<Integer> specialityIdList);
 
 
 }

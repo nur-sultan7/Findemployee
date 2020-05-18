@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.findemployee.data.Employee;
 import com.example.findemployee.data.MainViewModel;
 import com.example.findemployee.data.Speciality;
+import com.example.findemployee.data.SpecialityOfEmployee;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,18 +45,12 @@ public class JSONUtils {
             String birthday = jsonObject.getString(KEY_BIRTHDAY);
             String avatar_url = jsonObject.getString(KEY_AVATAR);
             JSONArray specialityJSON = jsonObject.getJSONArray(KEY_JSON_SPECIALITY);
-            ArrayList<Speciality>  specialityList = new ArrayList<>();
-            for (int j=0;j<specialityJSON.length();j++)
-            {
-                Speciality speciality = new Speciality(specialityJSON.getJSONObject(j).getInt(KEY_SPECIALITY_ID),specialityJSON.getJSONObject(j).getString(KEY_SPECIALITY_NAME));
-                mainViewModel.insertSpeciality(speciality);
-                specialityList.add(speciality);
-            }
+            List<SpecialityOfEmployee>  specialityList = new ArrayList<>();
+
             first_name = first_name.substring(0,1).toUpperCase()+first_name.substring(1).toLowerCase();
             last_name = last_name.substring(0,1).toUpperCase()+last_name.substring(1).toLowerCase();
 
-            int idid = specialityList.get(0).getId();
-            Employee employee = new Employee(first_name,last_name,birthday,avatar_url, idid);
+            Employee employee = new Employee(first_name,last_name,birthday,avatar_url);
             try {
                 employee.setUnique_Id((int) mainViewModel.insertEmployee(employee));
             } catch (ExecutionException e) {
@@ -63,6 +58,13 @@ public class JSONUtils {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            for (int j=0;j<specialityJSON.length();j++)
+            {
+                Speciality speciality = new Speciality(specialityJSON.getJSONObject(j).getInt(KEY_SPECIALITY_ID),specialityJSON.getJSONObject(j).getString(KEY_SPECIALITY_NAME));
+                mainViewModel.insertSpeciality(speciality);
+                specialityList.add(new SpecialityOfEmployee(speciality.getId(),employee.getUnique_Id()));
+            }
+            mainViewModel.insertSpecialityOfEmployee(specialityList);
             arrayList.add(employee);
         }
         return arrayList;

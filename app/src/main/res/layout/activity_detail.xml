@@ -91,27 +91,21 @@
                 android:layout_marginLeft="8dp"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/textViewBirthdayLabel" />
-            <TextView
-                android:id="@+id/textViewSpeciality"
-                android:layout_width="0dp"
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewSpecialityOfEmployee"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewBirthday"
-                android:gravity="center_horizontal" />
-
-
-
+                app:layout_constraintTop_toBottomOf="@id/textViewBirthday"
+                />
 
             <ImageView
                 android:id="@+id/imageViewAvatarEmployee"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginBottom="8dp"
-
-                app:layout_constraintBottom_toTopOf="@+id/textViewSpeciality"
+                app:layout_constraintBottom_toTopOf="@id/recyclerViewSpecialityOfEmployee"
                 app:layout_constraintEnd_toStartOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
